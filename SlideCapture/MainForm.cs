@@ -74,9 +74,26 @@ namespace SlideCapture
         // Generate PDF from captured slides
         private void btnGeneratePDF_Click(object sender, EventArgs e)
         {
-            string outputPath = "LectureSlides.pdf";
+            // Get the Downloads folder path
+            string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+
+            // Base file name
+            string baseFileName = "LectureSlides.pdf";
+
+            // Full file path
+            string outputPath = Path.Combine(downloadsPath, baseFileName);
+
+            // Check if file exists, and append a timestamp if it does
+            if (File.Exists(outputPath))
+            {
+                // Create a unique filename with timestamp to avoid overwriting
+                string timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                outputPath = Path.Combine(downloadsPath, $"LectureSlides_{timeStamp}.pdf");
+            }
+
+            // Generate the PDF
             _pdfGenerator.GeneratePDF(_slides, outputPath);
-            MessageBox.Show($"PDF Generated Successfully: {outputPath}");
+            MessageBox.Show("PDF Generated Successfully: " + outputPath);
         }
     }
 }

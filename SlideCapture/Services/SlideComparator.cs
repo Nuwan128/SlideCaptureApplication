@@ -21,7 +21,8 @@ public class SlideComparator : ISlideComparator
 
     private string ExtractTextFromImage(Bitmap image)
     {
-        using (var engine = new TesseractEngine(@"D:\Projects\C#\C#-New\SlideCaptureApplication\SlideCapture\tessdata", "eng", EngineMode.Default))
+        string tessdataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tessdata");
+        using (var engine = new TesseractEngine(tessdataPath, "eng", EngineMode.Default))
 
         {
             using (var pix = ConvertBitmapToPix(image)) // Convert Bitmap to Pix
