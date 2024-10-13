@@ -50,7 +50,7 @@
             // 
             btnStop.BackgroundImage = (Image)resources.GetObject("btnStop.BackgroundImage");
             btnStop.BackgroundImageLayout = ImageLayout.Zoom;
-            btnStop.Location = new Point(117, 12);
+            btnStop.Location = new Point(115, 12);
             btnStop.Name = "btnStop";
             btnStop.Size = new Size(80, 40);
             btnStop.TabIndex = 0;
@@ -61,7 +61,7 @@
             // 
             btnGeneratePDF.BackgroundImage = (Image)resources.GetObject("btnGeneratePDF.BackgroundImage");
             btnGeneratePDF.BackgroundImageLayout = ImageLayout.Zoom;
-            btnGeneratePDF.Location = new Point(222, 12);
+            btnGeneratePDF.Location = new Point(218, 12);
             btnGeneratePDF.Name = "btnGeneratePDF";
             btnGeneratePDF.Size = new Size(80, 40);
             btnGeneratePDF.TabIndex = 0;
@@ -72,10 +72,12 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(325, 59);
             Controls.Add(btnGeneratePDF);
             Controls.Add(btnStop);
             Controls.Add(btnStart);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
