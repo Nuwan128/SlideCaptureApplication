@@ -79,6 +79,8 @@
             Controls.Add(btnStart);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
+            MaximumSize = new Size(343, 106);
+            MinimumSize = new Size(343, 106);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SlideCapture_V1";
