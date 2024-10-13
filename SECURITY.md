@@ -18,7 +18,6 @@ We take security seriously. If you discover any security vulnerabilities in the 
 
 - **Email**: Please send an email to [nuwan.pradeep.dev@gmail.com](mailto:nuwan.pradeep.dev@gmail.com) with the details of the issue.
 - **Content**: Include a description of the issue, steps to reproduce, and any potential impact. The more detailed, the better.
-- **PGP Key**: If you'd like to send your report securely, you can use our PGP key, available [here](#).
   
 ### Response Time
 
