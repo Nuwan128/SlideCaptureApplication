@@ -1,5 +1,5 @@
-﻿using PdfSharp.Pdf;
-using PdfSharp.Drawing;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System.Drawing.Imaging;
 
 public class PDFGenerator : IPDFGenerator

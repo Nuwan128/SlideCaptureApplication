@@ -1,38 +1,31 @@
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Windows.Forms;
 
-namespace SlideCapture
+namespace SlideCapture;
+
+internal static class Program
 {
-    internal static class Program
+    private static ServiceProvider _serviceProvider;
+
+    [STAThread]
+    static void Main()
     {
-        private static ServiceProvider _serviceProvider;
+        var serviceCollection = new ServiceCollection();
+        ConfigureServices(serviceCollection);
 
-        [STAThread]
-        static void Main()
-        {
-            // Set up the dependency injection
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
+        _serviceProvider = serviceCollection.BuildServiceProvider();
 
-            _serviceProvider = serviceCollection.BuildServiceProvider();
+        ApplicationConfiguration.Initialize();
 
-            ApplicationConfiguration.Initialize();
+        var mainForm = _serviceProvider.GetRequiredService<MainForm>();
+        Application.Run(mainForm);
+    }
 
-            // Use the service provider to create the main form
-            var mainForm = _serviceProvider.GetRequiredService<MainForm>();
-            Application.Run(mainForm);
-        }
+    private static void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSingleton<IScreenCapture, ScreenCapture>();
+        services.AddSingleton<ISlideComparator, SlideComparator>();
+        services.AddSingleton<IPDFGenerator, PDFGenerator>();
 
-        private static void ConfigureServices(IServiceCollection services)
-        {
-            // Register the services and interfaces here
-            services.AddSingleton<IScreenCapture, ScreenCapture>();
-            services.AddSingleton<ISlideComparator, SlideComparator>();
-            services.AddSingleton<IPDFGenerator, PDFGenerator>();
-
-            // Register the form itself
-            services.AddTransient<MainForm>();
-        }
+        services.AddTransient<MainForm>();
     }
 }

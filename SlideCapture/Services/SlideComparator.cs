@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.IO;
-using Tesseract;
+﻿using Tesseract;
 
 public class SlideComparator : ISlideComparator
 {
