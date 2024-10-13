@@ -117,6 +117,8 @@ public partial class MainForm : Form
                     _pdfGenerator.GeneratePDF(_slides, outputPath);
                     MessageBox.Show("PDF Generated Successfully: " + outputPath,
                                     "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _slides.Clear();
+                    LogMessage("Slides cleared after PDF generation.");
                 }
             }
         }
