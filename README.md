@@ -17,7 +17,7 @@ The UI design and tooltips were supported by [Your Friend's Name]. For further U
 
 ## 💻 Installation
 To install this application:
-1. Download the latest installer from the [📦 Releases](https://github.com/your-repo/releases).
+1. Download the latest installer from the [📦 Releases](https://github.com/Nuwan128/SlideCaptureApplication/releases).
 2. Run the installer, and the application will be installed with a desktop icon.
 
 ## 🔧 Usage
@@ -33,5 +33,5 @@ We welcome contributions! Feel free to fork this repository, make improvements, 
 This project is licensed under the [MIT License](LICENSE).
 
 ## 🏆 Credits
-- **Development**: [Your Name](https://github.com/your-github-profile)
-- **UI Support**: [Your Friend's Name] (UI expert, contact: [UI Support Email Address])
+- **Development**: [Nuwan Pradeep](https://github.com/Nuwan128)
+- **UI Support**: [Subhash Jeewantha](https://github.com/HVSJeew4)
