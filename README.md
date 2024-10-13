@@ -13,7 +13,7 @@ This open-source application captures slides during Zoom meetings, detects dupli
 - **Start/Stop Confirmation:** Confirms with the user before starting or stopping the capture process.
 
 ## 👥 UI Support
-The UI design and tooltips were supported by [Your Friend's Name]. For further UI-related inquiries, contact them at: [UI Support Email Address].
+The UI design and tooltips were supported by [Subhash Jeewantha]. For further UI-related inquiries, contact them at: [hvsjeewantha4@gmail.com].
 
 ## 💻 Installation
 To install this application:
