@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             btnStart = new Button();
             btnStop = new Button();
             btnGeneratePDF = new Button();
@@ -35,31 +36,35 @@
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(71, 93);
+            btnStart.BackColor = Color.Transparent;
+            btnStart.BackgroundImage = (Image)resources.GetObject("btnStart.BackgroundImage");
+            btnStart.BackgroundImageLayout = ImageLayout.Zoom;
+            btnStart.Location = new Point(12, 12);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(150, 29);
+            btnStart.Size = new Size(80, 40);
             btnStart.TabIndex = 0;
-            btnStart.Text = "Start Capture";
-            btnStart.UseVisualStyleBackColor = true;
+            btnStart.UseVisualStyleBackColor = false;
             btnStart.Click += btnStart_Click;
             // 
             // btnStop
             // 
-            btnStop.Location = new Point(239, 93);
+            btnStop.BackgroundImage = (Image)resources.GetObject("btnStop.BackgroundImage");
+            btnStop.BackgroundImageLayout = ImageLayout.Zoom;
+            btnStop.Location = new Point(117, 12);
             btnStop.Name = "btnStop";
-            btnStop.Size = new Size(150, 29);
+            btnStop.Size = new Size(80, 40);
             btnStop.TabIndex = 0;
-            btnStop.Text = "Stop Capture";
             btnStop.UseVisualStyleBackColor = true;
             btnStop.Click += btnStop_Click;
             // 
             // btnGeneratePDF
             // 
-            btnGeneratePDF.Location = new Point(424, 93);
+            btnGeneratePDF.BackgroundImage = (Image)resources.GetObject("btnGeneratePDF.BackgroundImage");
+            btnGeneratePDF.BackgroundImageLayout = ImageLayout.Zoom;
+            btnGeneratePDF.Location = new Point(222, 12);
             btnGeneratePDF.Name = "btnGeneratePDF";
-            btnGeneratePDF.Size = new Size(150, 29);
+            btnGeneratePDF.Size = new Size(80, 40);
             btnGeneratePDF.TabIndex = 0;
-            btnGeneratePDF.Text = "Generate PDF ";
             btnGeneratePDF.UseVisualStyleBackColor = true;
             btnGeneratePDF.Click += btnGeneratePDF_Click;
             // 
@@ -67,12 +72,14 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(325, 59);
             Controls.Add(btnGeneratePDF);
             Controls.Add(btnStop);
             Controls.Add(btnStart);
+            MaximizeBox = false;
             Name = "MainForm";
-            Text = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "SlideCapture_V1";
             ResumeLayout(false);
         }
 

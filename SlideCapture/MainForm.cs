@@ -13,12 +13,14 @@ namespace SlideCapture
         private readonly IPDFGenerator _pdfGenerator;
         private readonly List<Bitmap> _slides;
         private readonly Rectangle _captureRegion;
+        private ToolTip buttonToolTip;
 
         // Inject dependencies through the constructor
         public MainForm(IScreenCapture screenCapture, ISlideComparator slideComparator, IPDFGenerator pdfGenerator)
         {
             InitializeComponent();
 
+            this.TopMost = true;
             _screenCapture = screenCapture;
             _slideComparator = slideComparator;
             _pdfGenerator = pdfGenerator;
@@ -32,7 +34,15 @@ namespace SlideCapture
             _captureTimer.Interval = 5000; // Capture every 5 seconds
             _captureTimer.Tick += CaptureTimer_Tick;
 
+            buttonToolTip = new ToolTip();
+            AddToolTips();
             LogMessage("Application started. Ready to capture slides.");
+        }
+        private void AddToolTips()
+        {
+            buttonToolTip.SetToolTip(btnStart, "Start Slide Capture");
+            buttonToolTip.SetToolTip(btnStop, "Stop Slide Capture");
+            buttonToolTip.SetToolTip(btnGeneratePDF, "Generate PDF of Slides");
         }
 
         // Capture and compare slides
@@ -74,26 +84,21 @@ namespace SlideCapture
         // Generate PDF from captured slides
         private void btnGeneratePDF_Click(object sender, EventArgs e)
         {
-            // Get the Downloads folder path
-            string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-
-            // Base file name
-            string baseFileName = "LectureSlides.pdf";
-
-            // Full file path
-            string outputPath = Path.Combine(downloadsPath, baseFileName);
-
-            // Check if file exists, and append a timestamp if it does
-            if (File.Exists(outputPath))
+            
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                // Create a unique filename with timestamp to avoid overwriting
-                string timeStamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                outputPath = Path.Combine(downloadsPath, $"LectureSlides_{timeStamp}.pdf");
-            }
+                saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+                saveFileDialog.Title = "Save PDF File";
+                saveFileDialog.FileName = "LectureSlides.pdf"; 
 
-            // Generate the PDF
-            _pdfGenerator.GeneratePDF(_slides, outputPath);
-            MessageBox.Show("PDF Generated Successfully: " + outputPath);
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string outputPath = saveFileDialog.FileName;
+
+                    _pdfGenerator.GeneratePDF(_slides, outputPath);
+                    MessageBox.Show("PDF Generated Successfully: " + outputPath);
+                }
+            }
         }
     }
 }
