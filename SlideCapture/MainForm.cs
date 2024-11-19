@@ -5,6 +5,7 @@ namespace SlideCapture;
 
 public partial class MainForm : Form
 {
+	#region Fields
 	// Time tracking for slide capture
 	private int seconds = 0;
 	private int minutes = 0;
@@ -28,6 +29,13 @@ public partial class MainForm : Form
 	// Constants for window style (shadow effect)
 	private const int CS_DROPSHADOW = 0x00020000;
 
+	// Constants for dragging
+	private const int WM_NCLBUTTONDOWN = 0xA1;
+	private const int HTCAPTION = 0x2;
+
+	#endregion
+
+	#region Win32 API Declarations
 	// External Win32 API for window style manipulation
 	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 	private static extern int SetClassLong(IntPtr hWnd, int nIndex, int dwNewLong);
@@ -35,6 +43,14 @@ public partial class MainForm : Form
 	[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 	private static extern int GetClassLong(IntPtr hWnd, int nIndex);
 
+	[DllImport("user32.dll")]
+	public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+	[DllImport("user32.dll")]
+	public static extern bool ReleaseCapture();
+	#endregion
+
+	#region Constructor
 	// Constructor initializing necessary services and setting up timers
 	public MainForm(IScreenCapture screenCapture, ISlideComparator slideComparator, IPDFGenerator pdfGenerator)
 	{
@@ -42,11 +58,14 @@ public partial class MainForm : Form
 		ApplyShadow();  // Apply window shadow effect
 		this.TopMost = true;  // Keep the form always on top
 		this.FormBorderStyle = FormBorderStyle.None; // Remove default borders
+		this.MouseDown += MainForm_MouseDown;
 
+		// Initialize services
 		_screenCapture = screenCapture;
 		_slideComparator = slideComparator;
 		_pdfGenerator = pdfGenerator;
 
+		// Initialize fields
 		_slides = new List<Bitmap>();
 		_captureRegion = Screen.PrimaryScreen.Bounds; // Define capture region to cover the entire screen
 
@@ -65,20 +84,105 @@ public partial class MainForm : Form
 
 		LogMessage("Application started. Ready to capture slides.");
 	}
+	#endregion
 
-	// Timer to update the elapsed time displayed on the form
-	private void AppTimer_Tick(object? sender, EventArgs e)
+	#region UI Event Handlers
+	// Dragable form setup
+	private void MainForm_MouseDown(object? sender, MouseEventArgs e)
 	{
-		seconds++;
-		if (seconds >= 60)
+		if (e.Button == MouseButtons.Left)
 		{
-			seconds = 0;
-			minutes++;
+			ReleaseCapture();
+			SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
 		}
-
-		TimeLabel.Text = $"{minutes:00}:{seconds:00}";
 	}
 
+	// Start capturing slides on button click
+	private void btnStart_Click(object sender, EventArgs e)
+	{
+		var result = MessageBox.Show("Are you sure you want to start capturing slides?", "Confirm Start", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+		if (result == DialogResult.Yes)
+		{
+			_appTimer.Start();
+			_captureTimer.Start();
+			btnStop.Enabled = true;
+			btnStart.Enabled = false;
+			LogMessage("Slide capturing started.");
+		}
+	}
+
+	// Stop capturing slides on button click
+	private void btnStop_Click(object sender, EventArgs e)
+	{
+		var result = MessageBox.Show("Are you sure you want to stop capturing slides?", "Confirm Stop", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+		if (result == DialogResult.Yes)
+		{
+			_appTimer.Stop();
+			_captureTimer.Stop();
+			btnStart.Enabled = true;
+			btnStop.Enabled = false;
+            btnGeneratePDF.Enabled = true;
+
+            btnGeneratePDF.BackgroundImage = Properties.Resources.Pdf_Download_Default;
+            CustomizeButtonHover(btnGeneratePDF, Properties.Resources.Pdf_Download_Default, Properties.Resources.Pdf_Download_Hover);
+
+            LogMessage("Slide capturing stopped.");
+		}
+	}
+
+	// Generate a PDF from captured slides
+	private void btnGeneratePDF_Click(object sender, EventArgs e)
+	{
+		if (_slides.Count > 0) // Ensure there are slides to generate a PDF
+		{
+			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+			{
+				saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+				saveFileDialog.Title = "Save PDF File";
+				saveFileDialog.FileName = "LectureSlides.pdf";
+
+				if (saveFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					string outputPath = saveFileDialog.FileName;
+					_pdfGenerator.GeneratePDF(_slides, outputPath); // Generate the PDF
+					MessageBox.Show("PDF Generated Successfully: " + outputPath, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					_slides.Clear(); // Clear slides after PDF generation
+
+					ResetTimersAndUI();
+					LogMessage("Slides cleared after PDF generation.");
+				}
+			}
+		}
+		else
+		{
+			CustomizeButtonHover(btnGeneratePDF, Properties.Resources.Pdf_Default, Properties.Resources.Pdf_Default_Hover);
+			MessageBox.Show("No slides captured. Please capture slides before generating the PDF.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+	}
+
+	// Minimize the application window
+	private void btnMinimize_Click(object sender, EventArgs e)
+	{
+		this.WindowState = FormWindowState.Minimized;
+	}
+
+	// Close the application window
+	private void btnClose_Click(object sender, EventArgs e)
+	{
+		this.Close();
+	}
+
+	private void MainForm_Load(object sender, EventArgs e)
+	{
+		CustomizeButtonHover(btnStart, Properties.Resources.Start_Default, Properties.Resources.Start_Hover);
+		CustomizeButtonHover(btnStop, Properties.Resources.Stop_Default, Properties.Resources.Stop_Hover);
+		CustomizeButtonHover(btnGeneratePDF, Properties.Resources.Pdf_Default, Properties.Resources.Pdf_Default_Hover);
+	}
+	#endregion
+
+	#region Private Helper Methods
 	// Apply shadow effect to the form
 	private void ApplyShadow()
 	{
@@ -113,6 +217,19 @@ public partial class MainForm : Form
 		buttonToolTip.SetToolTip(btnGeneratePDF, "Generate PDF of Slides");
 	}
 
+	// Timer to update the elapsed time displayed on the form
+	private void AppTimer_Tick(object? sender, EventArgs e)
+	{
+		seconds++;
+		if (seconds >= 60)
+		{
+			seconds = 0;
+			minutes++;
+		}
+
+		TimeLabel.Text = $"{minutes:00}:{seconds:00}";
+	}
+
 	// Timer that captures the screen and compares slides
 	private void CaptureTimer_Tick(object sender, EventArgs e)
 	{
@@ -133,75 +250,30 @@ public partial class MainForm : Form
 	// Log messages to the console (for debugging or tracking)
 	private void LogMessage(string message)
 	{
-		Console.WriteLine($"[MainForm] {message}");
+		Console.WriteLine(message); // You can also log to a file if necessary
 	}
 
-	// Start capturing slides on button click
-	private void btnStart_Click(object sender, EventArgs e)
+	// Reset timers and UI to default state
+	private void ResetTimersAndUI()
 	{
-		var result = MessageBox.Show("Are you sure you want to start capturing slides?", "Confirm Start", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-		if (result == DialogResult.Yes)
-		{
-			_appTimer.Start();
-			_captureTimer.Start();
-			btnStop.Enabled = true;
-			btnStart.Enabled = false;
-			LogMessage("Slide capturing started.");
-		}
+        btnGeneratePDF.BackgroundImage = Properties.Resources.Pdf_Default;
+        CustomizeButtonHover(btnGeneratePDF, Properties.Resources.Pdf_Default, Properties.Resources.Pdf_Default_Hover);
+        _appTimer.Stop();
+		_captureTimer.Stop();
+		seconds = 0;
+		minutes = 0;
+		TimeLabel.Text = "00:00";
+		SlideCountLabel.Text = "Slide Captured : 00";
 	}
 
-	// Stop capturing slides on button click
-	private void btnStop_Click(object sender, EventArgs e)
+	// Customize the appearance of buttons on hover
+	private void CustomizeButtonHover(Button button, Image defaultImage, Image hoverImage)
 	{
-		var result = MessageBox.Show("Are you sure you want to stop capturing slides?", "Confirm Stop", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+		button.FlatAppearance.MouseOverBackColor = Color.Transparent;
+		button.FlatAppearance.MouseDownBackColor = Color.Transparent;
 
-		if (result == DialogResult.Yes)
-		{
-			_appTimer.Stop();
-			_captureTimer.Stop();
-			btnStart.Enabled = true;
-			btnStop.Enabled = false;
-			LogMessage("Slide capturing stopped.");
-		}
+		button.MouseEnter += (sender, e) => button.BackgroundImage = hoverImage;
+		button.MouseLeave += (sender, e) => button.BackgroundImage = defaultImage;
 	}
-
-	// Generate a PDF from captured slides
-	private void btnGeneratePDF_Click(object sender, EventArgs e)
-	{
-		if (_slides.Count > 0) // Ensure there are slides to generate a PDF
-		{
-			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-			{
-				saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
-				saveFileDialog.Title = "Save PDF File";
-				saveFileDialog.FileName = "LectureSlides.pdf";
-
-				if (saveFileDialog.ShowDialog() == DialogResult.OK)
-				{
-					string outputPath = saveFileDialog.FileName;
-					_pdfGenerator.GeneratePDF(_slides, outputPath); // Generate the PDF
-					MessageBox.Show("PDF Generated Successfully: " + outputPath, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					_slides.Clear(); // Clear slides after PDF generation
-					LogMessage("Slides cleared after PDF generation.");
-				}
-			}
-		}
-		else
-		{
-			MessageBox.Show("No slides captured. Please capture slides before generating the PDF.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
-	}
-
-	// Minimize the application window
-	private void btnMinimize_Click(object sender, EventArgs e)
-	{
-		this.WindowState = FormWindowState.Minimized;
-	}
-
-	// Close the application window
-	private void btnClose_Click(object sender, EventArgs e)
-	{
-		this.Close();
-	}
+	#endregion
 }

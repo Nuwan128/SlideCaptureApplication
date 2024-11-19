@@ -184,6 +184,7 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SlideCapture_V1";
+            Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -200,5 +201,5 @@
         private Label SlideCountLabel;
         private Label TimeLabel;
         private Label label2;
-    }
+	}
 }

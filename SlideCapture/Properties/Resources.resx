@@ -117,4 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Pdf_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pdf_Default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pdf_Default_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pdf_Default_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pdf_Download_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pdf_Download_Default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Pdf_Download_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Pdf_Download_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Start_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Start_Default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Start_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Start_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stop_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Stop_Default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stop_Hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Stop_Hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
