@@ -15,13 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_35EA390CA7CC4E33B3A9A03A61226A78"
+        "MsmKey" = "8:_ACE7F926DE304CCDB224AE3B7C2A6066"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_84221530993546BF8D8FE7F4FA87DAFE"
+        "MsmKey" = "8:_F273DB0CFC3643AC8BA679E457F82577"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -50,6 +50,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -74,6 +82,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -106,10 +122,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_35EA390CA7CC4E33B3A9A03A61226A78"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F273DB0CFC3643AC8BA679E457F82577"
             {
-            "SourcePath" = "8:C:\\Users\\Nuwan\\Downloads\\favicon (3) (1).ico"
-            "TargetName" = "8:favicon (3) (1).ico"
+            "SourcePath" = "8:D:\\Slide Capture\\SlideCaptureUI\\Logo 2.ico"
+            "TargetName" = "8:Logo 2.ico"
             "Tag" = "8:"
             "Folder" = "8:_ADE1162143F44BFE85A1BEA7969CF526"
             "Condition" = "8:"
@@ -182,23 +198,23 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Slide Capture"
-        "ProductCode" = "8:{B9C6267E-B70F-4614-8852-D75ED28A7377}"
-        "PackageCode" = "8:{B959FC4A-21A1-456D-9A65-E986BB331375}"
+        "ProductCode" = "8:{ABE6C6B0-6930-496E-91F1-F1A6DBE9B3AB}"
+        "PackageCode" = "8:{66E6E929-EF4A-4E7E-97CC-F3850735E92D}"
         "UpgradeCode" = "8:{F3898727-DBC8-4E0A-A8E5-969ABCDD8FE9}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
-        "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
+        "ProductVersion" = "8:1.0.1"
+        "Manufacturer" = "8:Nuwan Pradeep"
+        "ARPHELPTELEPHONE" = "8:+94764624525"
+        "ARPHELPLINK" = "8:https://slidecapture.orchidlab.io"
         "Title" = "8:Slide Capture"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:Nuwan Pradeep"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
+        "ARPCOMMENTS" = "8:Slide Capture Application - A powerful open-source tool for automatically capturing, organizing, and exporting slides from Zoom meetings. Designed for students, educators, and professionals, it features AI-powered slide detection, a user-friendly interface, and one-click PDF generation for seamless presentation management."
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
@@ -303,7 +319,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AFC997A1147B4368BC7B793293AEC7EF"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3B412269A0D34BC18D20670EDEE3CD7B"
             {
             "Name" = "8:Slide Capture"
             "Arguments" = "8:"
@@ -311,10 +327,24 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_84221530993546BF8D8FE7F4FA87DAFE"
+            "Target" = "8:_ACE7F926DE304CCDB224AE3B7C2A6066"
             "Folder" = "8:_808B60893E6548A6B6B420D015724C1A"
             "WorkingFolder" = "8:_ADE1162143F44BFE85A1BEA7969CF526"
-            "Icon" = "8:_35EA390CA7CC4E33B3A9A03A61226A78"
+            "Icon" = "8:_F273DB0CFC3643AC8BA679E457F82577"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_827DA09650AB40108036BE95FC0EEA20"
+            {
+            "Name" = "8:Slide Capture"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_ACE7F926DE304CCDB224AE3B7C2A6066"
+            "Folder" = "8:_95091388F9584BE188EE545DD6929A09"
+            "WorkingFolder" = "8:_ADE1162143F44BFE85A1BEA7969CF526"
+            "Icon" = "8:_F273DB0CFC3643AC8BA679E457F82577"
             "Feature" = "8:"
             }
         }
@@ -716,9 +746,9 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_84221530993546BF8D8FE7F4FA87DAFE"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ACE7F926DE304CCDB224AE3B7C2A6066"
             {
-            "SourcePath" = "8:..\\SlideCapture\\obj\\Debug\\net8.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\SlideCapture\\obj\\Release\\net8.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_ADE1162143F44BFE85A1BEA7969CF526"
