@@ -13,7 +13,7 @@ This open-source application captures slides during Zoom meetings, detects dupli
 - **Start/Stop Confirmation:** Confirms with the user before starting or stopping the capture process.
 
 ## 👥 UI Support
-The UI design and tooltips were supported by [Subhash Jeewantha](https://github.com/HVSJeew4). For further UI-related inquiries, contact them at: hvsjeewantha4@gmail.com.
+The updated UI design for v1.0.1 was created by Wimukthi, bringing a fresh and modern look to the application. For inquiries related to the updated UI, you can contact [Nirmala Vimukthi](https://github.com/NirmalaVimukthi). For inquiries related to the UI design or tooltips from the initial version, you can still reach out to [Subhash Jeewantha](https://github.com/HVSJeew4).
 
 ## 💻 Installation
 To install this application:
@@ -34,4 +34,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 🏆 Credits
 - **Development**: [Nuwan Pradeep](https://github.com/Nuwan128)
+- **UI Support**: [Nirmala Vimukthi](https://github.com/NirmalaVimukthi)
 - **UI Support**: [Subhash Jeewantha](https://github.com/HVSJeew4)
