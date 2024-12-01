@@ -1,0 +1,243 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const sections = [
+    {
+        title: "Getting Started",
+        items: [
+            {
+                title: "Installation",
+                content: "Download and install Slide Capture from our website. Follow the installation wizard to set up the application on your system."
+            },
+            {
+                title: "Quick Start",
+                content: "Launch Slide Capture before starting your presentation. The application will automatically detect and capture slides as they appear."
+            }
+        ]
+    },
+    {
+        title: "Features Guide",
+        items: [
+            {
+                title: "Automated Capture",
+                content: "The application monitors your screen for presentation windows and automatically captures new slides. No manual intervention required."
+            },
+            {
+                title: "Duplicate Detection",
+                content: "AI-powered algorithms analyze captured slides to remove duplicates. Adjust sensitivity in settings for optimal results."
+            },
+            {
+                title: "PDF Generation",
+                content: "Convert captured slides to PDF with customizable layouts, quality settings, and metadata options."
+            }
+        ]
+    }
+];
+
+const apiReference = [
+ 
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={`Documentation | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <section class="docs-hero">
+                <h1>Documentation</h1>
+                <p>Everything you need to know about using Slide Capture</p>
+            </section>
+
+            <div class="docs-container">
+                <nav class="docs-nav">
+                    <ul>
+                        {sections.map(section => (
+                            <li>
+                                <a href={`#${section.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                                    {section.title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+
+                <div class="docs-content">
+                    {sections.map(section => (
+                        <section id={section.title.toLowerCase().replace(/\s+/g, '-')} class="docs-section">
+                            <h2>{section.title}</h2>
+                            {section.items.map(item => (
+                                <div class="docs-item">
+                                    <h3>{item.title}</h3>
+                                    <p>{item.content}</p>
+                                </div>
+                            ))}
+                        </section>
+                    ))}
+
+                   
+                </div>
+            </div>
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .docs-hero {
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .docs-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .docs-hero p {
+        font-size: 1.25rem;
+        opacity: 0.9;
+    }
+
+    .docs-container {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .docs-nav {
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+    }
+
+    .docs-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .docs-nav a {
+        display: block;
+        padding: 0.75rem 1rem;
+        color: #666;
+        text-decoration: none;
+        border-left: 3px solid transparent;
+        transition: all 0.2s;
+    }
+
+    .docs-nav a:hover {
+        color: var(--accent);
+        border-left-color: var(--accent);
+        background: rgba(143, 40, 198, 0.05);
+    }
+
+    .docs-section {
+        margin-bottom: 4rem;
+    }
+
+    .docs-section h2 {
+        color: var(--accent);
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #eee;
+    }
+
+    .docs-item {
+        margin-bottom: 2rem;
+    }
+
+    .docs-item h3 {
+        color: var(--accent-dark);
+        margin-bottom: 1rem;
+    }
+
+    .docs-item p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .api-grid {
+        display: grid;
+        gap: 2rem;
+    }
+
+    .api-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .api-card h3 {
+        color: var(--accent);
+        font-family: monospace;
+        margin-bottom: 1rem;
+    }
+
+    .api-card p {
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+
+    .api-details {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .api-param,
+    .api-return {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    .api-param strong,
+    .api-return strong {
+        color: var(--accent-dark);
+    }
+
+    .api-param span,
+    .api-return span {
+        font-family: monospace;
+        color: #666;
+        background: #f5f5f5;
+        padding: 0.5rem;
+        border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+        .docs-container {
+            grid-template-columns: 1fr;
+        }
+
+        .docs-nav {
+            position: static;
+            margin-bottom: 2rem;
+        }
+
+        .docs-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .docs-nav a {
+            border-left: none;
+            border-radius: 6px;
+            background: #f5f5f5;
+        }
+    }
+</style>

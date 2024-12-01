@@ -1,0 +1,96 @@
+---
+const features = [
+    {
+        title: "Automated Capture",
+        description: "Automatically capture slides during Zoom presentations without manual intervention",
+        icon: "📸"
+    },
+    {
+        title: "AI Duplicate Detection",
+        description: "Smart AI-powered detection removes duplicate slides automatically",
+        icon: "🤖"
+    },
+    {
+        title: "One-Click PDF",
+        description: "Generate professional PDFs from your captured slides instantly",
+        icon: "📄"
+    },
+    {
+        title: "User-Friendly",
+        description: "Simple interface designed for students, professionals, and educators",
+        icon: "👥"
+    }
+];
+---
+
+<section class="features">
+    <div class="container">
+        <h2 class="text-center mb-4">Key Features</h2>
+        <div class="feature-grid">
+            {features.map(feature => (
+                <div class="feature-card slide-up">
+                    <div class="icon">{feature.icon}</div>
+                    <h3>{feature.title}</h3>
+                    <p>{feature.description}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .features {
+        padding: 4rem var(--container-padding);
+        background: #f8f8f8;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow);
+        text-align: center;
+        transition: transform 0.2s;
+        border: 1px solid #C8C8C8;
+        height: 100%;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+    }
+
+    .icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    h3 {
+        color: var(--accent);
+        margin-bottom: 1rem;
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+    }
+
+    p {
+        color: #666;
+        line-height: 1.6;
+        margin: 0;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+    }
+
+    @media (max-width: 768px) {
+        .features {
+            padding: 2rem var(--container-padding);
+        }
+
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

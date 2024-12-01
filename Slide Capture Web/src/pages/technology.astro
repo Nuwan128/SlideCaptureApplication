@@ -1,0 +1,171 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const techStack = [
+    {
+        category: "Core Technology",
+        items: [
+            {
+                name: "C# .NET",
+                description: "Modern, high-performance framework for desktop applications",
+                features: ["Cross-platform support", "High performance", "Rich ecosystem"]
+            },
+            {
+                name: "Windows Forms",
+                description: "Native Windows UI framework for intuitive user interfaces",
+                features: ["Native performance", "System integration", "Familiar UI patterns"]
+            }
+        ]
+    },
+    {
+        category: "AI & Image Processing",
+        items: [
+            {
+                name: "Computer Vision",
+                description: "Advanced algorithms for slide detection and comparison",
+                features: ["Real-time processing", "Pattern recognition", "Image analysis"]
+            },
+            {
+                name: "Machine Learning",
+                description: "Smart duplicate detection and content analysis",
+                features: ["Adaptive learning", "High accuracy", "Optimized performance"]
+            }
+        ]
+    },
+    {
+        category: "Architecture",
+        items: [
+            {
+                name: "Clean Architecture",
+                description: "Maintainable and scalable code organization",
+                features: ["SOLID principles", "Dependency injection", "Unit testing"]
+            },
+            {
+                name: "Design Patterns",
+                description: "Industry-standard software design patterns",
+                features: ["Observer pattern", "Factory pattern", "Command pattern"]
+            }
+        ]
+    }
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={`Technology Stack | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <section class="tech-hero">
+                <h1>Technology Stack</h1>
+                <p>Built with modern technologies for optimal performance and reliability</p>
+            </section>
+
+            <section class="tech-stack">
+                {techStack.map(category => (
+                    <div class="category">
+                        <h2>{category.category}</h2>
+                        <div class="tech-grid">
+                            {category.items.map(item => (
+                                <div class="tech-card">
+                                    <h3>{item.name}</h3>
+                                    <p>{item.description}</p>
+                                    <ul>
+                                        {item.features.map(feature => (
+                                            <li>{feature}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </section>
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .tech-hero {
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .tech-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .tech-hero p {
+        font-size: 1.25rem;
+        opacity: 0.9;
+    }
+
+    .tech-stack {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .category {
+        margin-bottom: 4rem;
+    }
+
+    .category h2 {
+        color: var(--accent);
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .tech-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .tech-card h3 {
+        color: var(--accent-dark);
+        margin-bottom: 1rem;
+    }
+
+    .tech-card p {
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+
+    .tech-card ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .tech-card li {
+        padding: 0.5rem 0;
+        color: #444;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .tech-card li::before {
+        content: "•";
+        color: var(--accent);
+        font-weight: bold;
+    }
+</style>

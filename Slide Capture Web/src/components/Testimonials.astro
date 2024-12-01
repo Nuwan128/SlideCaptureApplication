@@ -1,0 +1,112 @@
+---
+const testimonials = [
+     {
+        quote: "As a software engineer, I appreciate the streamlined workflow this application offers. Features like PDF export greatly enhance productivity and usability for technical documentation.",
+        author: "Lahiru Sadaruwan",
+        role: "Software Engineer"
+    },
+    {
+        quote: "This application is very useful for me. And this is very simple and very effective. My suggestion is add help section for uses!",
+        author: "Savinda Kaveesha",
+        role: "Ungraduate"
+    },
+    {
+        quote: "Best wishes for your project ! May it bring value , opportunities  , and success.  Stay creative  and confident  - I'm sure it will make a great impact. GOOD LUCK ..! ",
+        author: "Sapna Gamlath",
+        role: "Ungraduate"
+    },
+    {
+        quote: "This desktop application is very important for every student learning online. It would be very useful if this could be expanded to other conferencing apps.",
+        author: "Lakshitha Warnamal",
+        role: "Ungraduate"
+    },
+    {
+        quote: "Perfect for creating study materials. The PDF export is a game-changer.",
+        author: "Prageeth Anushka",
+        role: "Ungraduate"
+    },
+    {
+        quote: "This tool has revolutionized how I take notes during online lectures!",
+        author: "Vidusha Srimini",
+        role: "Ungraduate"
+    },
+];
+---
+
+<section class="testimonials">
+    <div class="container">
+        <h2 class="text-center mb-4">What Users Say</h2>
+        <div class="testimonial-grid">
+            {testimonials.map(testimonial => (
+                <div class="testimonial-card slide-up">
+                    <blockquote>"{testimonial.quote}"</blockquote>
+                    <div class="author">
+                        <strong>{testimonial.author}</strong>
+                        <span>{testimonial.role}</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .testimonials {
+        padding: 4rem var(--container-padding);
+        background: white;
+    }
+
+    h2 {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        color: var(--accent-dark);
+    }
+
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .testimonial-card {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow);
+        height: 100%;
+    }
+
+    blockquote {
+        font-size: clamp(1rem, 1.5vw, 1.1rem);
+        line-height: 1.6;
+        color: rgb(var(--gray-dark));
+        margin-bottom: 1.5rem;
+        border-left: none;
+        padding: 0;
+    }
+
+    .author {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .author strong {
+        color: var(--accent-dark);
+        font-size: clamp(0.9rem, 1.2vw, 1rem);
+    }
+
+    .author span {
+        color: rgb(var(--gray));
+        font-size: clamp(0.8rem, 1vw, 0.9rem);
+    }
+
+    @media (max-width: 768px) {
+        .testimonials {
+            padding: 2rem var(--container-padding);
+        }
+
+        .testimonial-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

@@ -1,0 +1,368 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { useState } from 'react';
+import { SITE_TITLE, SITE_DESCRIPTION, GITHUB_URL, BUYMEACOFFEE_URL } from '../consts';
+
+const contributors = [
+    {
+        name: "Nuwan Pradeep",
+        role: "Core Developer",
+        avatar: "/avatars/nuwan.png",
+        linkdin: "nuwan128"
+    },
+    {
+        name: " Nirmala Vimukthi",
+        role: "UI/UX Designer",
+        avatar: "/avatars/wimukthi.jpg",
+        linkdin: "nirmala-vimukthi"
+    },
+    {
+        name: " Subhash Jeewantha",
+        role: "UI/UX Designer",
+        avatar: "/avatars/Subash.jpg",
+        linkdin: "subhash-jeewantha-3212a0213"
+    },
+    {
+        name: "Lakshan Maduka",
+        role: "Tester",
+        avatar: "/avatars/maduka.jpg",
+        linkdin: "lakshan-maduka"
+    },
+    {
+        name: "Dushmantha Ranathunga",
+        role: "Tester",
+        avatar: "/avatars/dushmantha.jpg",
+        linkdin: "dushmantha-ranathunga"
+    }
+];
+
+const guidelines = [
+    "Fork the repository and create a feature branch",
+    "Write clean, documented code following our style guide",
+    "Include unit tests for new features",
+    "Submit a pull request with a clear description",
+    "Engage in code review discussions"
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={`Community | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <section class="community-hero">
+                <h1>Join Our Community</h1>
+                <p>Help make Slide Capture even better</p>
+                <div class="hero-buttons">
+                    <a href={GITHUB_URL} class="github-button" target="_blank">
+                        <svg viewBox="0 0 16 16" aria-hidden="true" width="20" height="20">
+                            <path
+                                fill="currentColor"
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                            ></path>
+                        </svg>
+                        View on GitHub
+                    </a>
+                    <a href={BUYMEACOFFEE_URL} target="_blank" class="coffee-button">
+                        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="40" width="187" />
+                    </a>
+                </div>
+            </section>
+
+            <section class="contribution-guide">
+                <h2>How to Contribute</h2>
+                <div class="guidelines">
+                    <ul>
+                        {guidelines.map(guideline => (
+                            <li>{guideline}</li>
+                        ))}
+                    </ul>
+                </div>
+            </section>
+
+           <section class="contributors">
+                <h2>Core Contributors</h2>
+                <div class="contributors-grid">
+                    {contributors.map(contributor => (
+                        <div class="contributor-card" key={contributor.linkdin}>
+                            <div class="avatar-placeholder">
+                                {contributor.avatar ? (
+                                    <img src={contributor.avatar} alt={contributor.name} class="avatar-image" />
+                                ) : (
+                                    contributor.name[0]
+                                )}
+                            </div>
+                            <h3>{contributor.name}</h3>
+                            <p>{contributor.role}</p>
+                            <a href={`https://www.linkedin.com/in/${contributor.linkdin}`} target="_blank" rel="noopener noreferrer">@{contributor.linkdin}</a>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+
+            <section class="contact-form">
+                <h2>Get in Touch</h2>
+                <form class="feedback-form" id="feedback-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </section>
+        </main>
+        <Footer />
+            <script>
+                    document.getElementById('feedback-form').addEventListener('submit', async function (event) {
+                    event.preventDefault();
+
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+
+                    try {
+                        const response = await fetch('/api/send-email', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name, email, message }),
+                        });
+
+
+                        if (response.ok) {
+                            alert('Message sent successfully!');
+                            document.getElementById('feedback-form').reset();
+                        } else {
+                            throw new Error('Failed to send message.');
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        alert('Error sending message. Please try again later.');
+                    }
+                });
+        </script>
+    </body>
+</html>
+
+<style>
+    .community-hero {
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .community-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .community-hero p {
+        font-size: 1.25rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .github-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: white;
+        color: var(--accent);
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .github-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .coffee-button {
+        display: inline-block;
+        transition: transform 0.2s;
+    }
+
+    .coffee-button:hover {
+        transform: translateY(-2px);
+    }
+
+    .contribution-guide,
+    .contributors,
+    .contact-form {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+    }
+
+    h2 {
+        color: var(--accent);
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .guidelines ul {
+        max-width: 800px;
+        margin: 0 auto;
+        list-style: none;
+        padding: 0;
+    }
+
+    .guidelines li {
+        padding: 1rem;
+        background: white;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .guidelines li::before {
+        content: "→";
+        color: var(--accent);
+        font-weight: bold;
+    }
+
+    .contributors-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .contributor-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    overflow: hidden; /* Ensures the image fits within the circle */
+}
+
+.avatar-placeholder .avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area of the circle without distortion */
+}
+
+    .contributor-card h3 {
+        color: var(--accent-dark);
+        margin-bottom: 0.5rem;
+    }
+
+    .contributor-card p {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+
+    .contributor-card a {
+        color: var(--accent);
+        text-decoration: none;
+    }
+
+    .feedback-form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #444;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(143, 40, 198, 0.1);
+    }
+
+    button[type="submit"] {
+        background: var(--accent);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        width: 100%;
+    }
+
+    button[type="submit"]:hover {
+        background: var(--accent-dark);
+    }
+
+    @media (max-width: 768px) {
+        .contributors-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+        }
+
+        .github-button,
+        .coffee-button {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .coffee-button img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+</style>

@@ -1,0 +1,126 @@
+---
+import { DOWNLOAD_URL } from '../consts';
+---
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content slide-up">
+            <h1>Capture Slides Effortlessly</h1>
+            <p>Automated Zoom slide capture with AI-powered duplicate detection and one-click PDF generation</p>
+            <div class="cta-buttons">
+                <a href={DOWNLOAD_URL} class="button button-secondary" download>
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 16L7 11H17L12 16Z" fill="currentColor"/>
+                        <path d="M12 2V11M12 16L7 11H17L12 16ZM6 22H18" stroke="currentColor" stroke-width="2"/>
+                    </svg>Download Now</a>
+                <a href="/features" class="button button-primary">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero {
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        color: white;
+        padding: clamp(3rem, 10vw, 6rem) 0;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        margin-bottom: clamp(1rem, 3vw, 1.5rem);
+        color: white;
+        line-height: 1.2;
+    }
+
+    p {
+        font-size: clamp(1rem, 2vw, 1.5rem);
+        margin-bottom: clamp(1.5rem, 4vw, 2rem);
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center; /* Ensures vertical alignment */
+    flex-wrap: wrap; /* Allows buttons to stack on smaller screens */
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: white;
+    color: var(--accent);
+    gap: 0.5rem;
+    height: 50px; /* Ensure consistent button height */
+    min-width: 200px; /* Set consistent button width */
+}
+
+.button-primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.button-primary:hover {
+    background: white;
+    color: var(--accent);
+    border-color: var(--accent-dark);
+}
+
+.button-secondary {
+    color: var(--accent);
+    border-color: var(--accent-dark);
+}
+
+.button-secondary:hover {
+    background: var(--accent-light);
+    color: white;
+}
+
+
+
+    @media (max-width: 768px) {
+        .hero {
+            padding: 3rem var(--container-padding);
+        }
+
+         .cta-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .button {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    }
+</style>

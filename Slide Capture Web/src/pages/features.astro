@@ -1,0 +1,161 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const features = [
+    {
+        title: "Automated Slide Capture",
+        description: "Automatically detect and capture slides during Zoom presentations without any manual intervention. Our smart detection system ensures you never miss important content.",
+        icon: "🎯",
+        details: [
+            "Real-time slide detection",
+            "Automatic screen capture",
+            "Background processing",
+            "Multiple monitor support"
+        ]
+    },
+    {
+        title: "AI-Powered Duplicate Detection",
+        description: "Advanced artificial intelligence algorithms automatically identify and remove duplicate slides, ensuring your final document contains only unique content.",
+        icon: "🤖",
+        details: [
+            "Machine learning-based comparison",
+            "High accuracy detection",
+            "Automatic cleanup",
+            "Custom sensitivity settings"
+        ]
+    },
+    {
+        title: "One-Click PDF Generation",
+        description: "Convert your captured slides into professional-quality PDF documents instantly. Perfect for creating study materials or sharing presentations.",
+        icon: "📄",
+        details: [
+            "Multiple format support",
+            "Custom page layouts",
+            "Automatic indexing",
+            "Batch processing"
+        ]
+    },
+    {
+        title: "User-Friendly Interface",
+        description: "Designed with simplicity in mind, our intuitive interface makes it easy for anyone to use, regardless of technical expertise.",
+        icon: "🎨",
+        details: [
+            "Clean, modern design",
+            "Easy navigation",
+            "Customizable settings",
+            "Helpful tooltips"
+        ]
+    }
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={`Features | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <section class="features-hero">
+                <h1>Powerful Features</h1>
+                <p>Discover what makes Slide Capture the perfect tool for your presentation needs</p>
+            </section>
+
+            <section class="features-grid">
+                {features.map(feature => (
+                    <div class="feature-card">
+                        <div class="feature-icon">{feature.icon}</div>
+                        <h2>{feature.title}</h2>
+                        <p>{feature.description}</p>
+                        <ul>
+                            {feature.details.map(detail => (
+                                <li>{detail}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </section>
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .features-hero {
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .features-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .features-hero p {
+        font-size: 1.25rem;
+        opacity: 0.9;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h2 {
+        color: var(--accent);
+        margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-card ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .feature-card li {
+        padding: 0.5rem 0;
+        color: #444;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .feature-card li::before {
+        content: "✓";
+        color: var(--accent);
+        font-weight: bold;
+    }
+</style>

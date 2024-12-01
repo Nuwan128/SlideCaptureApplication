@@ -1,0 +1,174 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const faqs = [
+    {
+        question: "How does the automatic slide capture work?",
+        answer: "Our application uses advanced AI algorithms to detect changes in the presentation window. When a new slide appears, it automatically captures the content while filtering out unnecessary elements."
+    },
+    {
+        question: "Can I use this with other presentation software besides Zoom?",
+        answer: "Yes! While optimized for Zoom, Slide Capture works with any presentation software including Microsoft Teams, Google Meet, and local presentation viewers."
+    },
+    {
+        question: "How accurate is the duplicate detection?",
+        answer: "Our AI-powered duplicate detection has a 99.9% accuracy rate. It can even detect slight variations between slides while ignoring minor visual artifacts."
+    },
+    {
+        question: "What file formats are supported for export?",
+        answer: "Currently, we support PDF, PNG sequence, and PPTX export formats. The PDF export includes options for layout customization and quality settings."
+    },
+    {
+        question: "Is there a limit to how many slides I can capture?",
+        answer: "No, there's no practical limit to the number of slides you can capture in a session. The application is optimized for memory usage and can handle hours of continuous capture."
+    },
+    {
+        question: "Do I need an internet connection?",
+        answer: "No, Slide Capture works completely offline. An internet connection is only needed for updates and cloud backup features."
+    }
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={`FAQ | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <section class="faq-hero">
+                <h1>Frequently Asked Questions</h1>
+                <p>Find answers to common questions about Slide Capture</p>
+            </section>
+
+            <section class="faq-content">
+                <div class="faq-grid">
+                    {faqs.map(faq => (
+                        <details class="faq-item">
+                            <summary>{faq.question}</summary>
+                            <p>{faq.answer}</p>
+                        </details>
+                    ))}
+                </div>
+
+                <div class="still-questions">
+                    <h2>Still Have Questions?</h2>
+                    <p>Can't find what you're looking for? Feel free to reach out to our support team.</p>
+                    <a href="/contact" class="contact-button">Contact Support</a>
+                </div>
+            </section>
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .faq-hero {
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .faq-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .faq-hero p {
+        font-size: 1.25rem;
+        opacity: 0.9;
+    }
+
+    .faq-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .faq-grid {
+        display: grid;
+        gap: 1rem;
+        margin-bottom: 4rem;
+    }
+
+    .faq-item {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    .faq-item summary {
+        padding: 1.5rem;
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--accent-dark);
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .faq-item summary::after {
+        content: "+";
+        font-size: 1.5rem;
+        color: var(--accent);
+    }
+
+    .faq-item[open] summary::after {
+        content: "-";
+    }
+
+    .faq-item p {
+        padding: 0 1.5rem 1.5rem;
+        color: #666;
+        margin: 0;
+    }
+
+    .still-questions {
+        text-align: center;
+        padding: 4rem 0;
+    }
+
+    .still-questions h2 {
+        color: var(--accent);
+        margin-bottom: 1rem;
+    }
+
+    .still-questions p {
+        color: #666;
+        margin-bottom: 2rem;
+    }
+
+    .contact-button {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .contact-button:hover {
+        background: var(--accent-dark);
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .faq-hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .faq-content {
+            padding: 1rem;
+        }
+    }
+</style>

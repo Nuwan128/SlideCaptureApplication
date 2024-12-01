@@ -1,0 +1,139 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const steps = [
+    {
+        title: "1. Start Your Session",
+        description: "Launch Slide Capture before your Zoom meeting begins. The application runs quietly in the background, ready to capture your slides.",
+        image: "/screenshots/start-session.png"
+    },
+    {
+        title: "2. Automatic Capture",
+        description: "During the presentation, our AI automatically detects and captures new slides as they appear, with no manual intervention required.",
+        image: "/screenshots/auto-capture.png"
+    },
+    {
+        title: "3. Smart Processing",
+        description: "Our AI algorithms analyze each capture, removing duplicates and ensuring only unique slides are kept.",
+        image: "/screenshots/processing.png"
+    },
+    {
+        title: "4. Generate PDF",
+        description: "When you're done, simply click to generate a clean, professional PDF document containing all your captured slides.",
+        image: "/screenshots/pdf-export.png"
+    }
+];
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <BaseHead title={`How It Works | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <section class="how-it-works-hero">
+                <h1>How It Works</h1>
+                <p>Simple, efficient, and automatic slide capture in four easy steps</p>
+            </section>
+
+            <section class="steps">
+                {steps.map((step, index) => (
+                    <div class="step">
+                        <div class="step-content">
+                            <h2>{step.title}</h2>
+                            <p>{step.description}</p>
+                        </div>
+                        <div class="step-image">
+                            <div class="image-placeholder">
+                                [Screenshot of {step.title.toLowerCase()}]
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </section>
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style>
+    .how-it-works-hero {
+        background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .how-it-works-hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .how-it-works-hero p {
+        font-size: 1.25rem;
+        opacity: 0.9;
+    }
+
+    .steps {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .step {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 4rem;
+        align-items: center;
+    }
+
+    .step:nth-child(even) {
+        direction: rtl;
+    }
+
+    .step:nth-child(even) .step-content {
+        direction: ltr;
+    }
+
+    .step-content h2 {
+        color: var(--accent);
+        margin-bottom: 1rem;
+    }
+
+    .step-content p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .image-placeholder {
+        background: #f0f0f0;
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        color: #666;
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+        .step {
+            grid-template-columns: 1fr;
+            direction: ltr;
+        }
+
+        .step:nth-child(even) {
+            direction: ltr;
+        }
+    }
+</style>
