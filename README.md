@@ -34,5 +34,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 🏆 Credits
 - **Development**: [Nuwan Pradeep](https://github.com/Nuwan128)
+- **Deployment**: [Lahiru Sadaruwan](https://github.com/Nuwan128)
 - **UI Support**: [Nirmala Vimukthi](https://github.com/NirmalaVimukthi)
 - **UI Support**: [Subhash Jeewantha](https://github.com/HVSJeew4)
